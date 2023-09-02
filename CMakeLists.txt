@@ -9,7 +9,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_PREFIX_PATH /home/scphamster/dev/yocto/sdk/my-custom-image-sdk/sysroots/cortexa7t2hf-neon-vfpv4-ostl-linux-gnueabi/usr/lib/cmake/Qt5)
 set(OE_QMAKE_PATH_EXTERNAL_HOST_BINS /home/scphamster/dev/yocto/sdk/my-custom-image-sdk/sysroots/x86_64-ostl_sdk-linux/usr/bin)
 
-set(QML_SOURCES src/qml/main.qml)
+set(QML_SOURCES src/assets/qml/main.qml)
 
 set(SRCES
         src/sources/main.cpp
@@ -40,10 +40,10 @@ target_include_directories(${PROJECT_NAME} PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src/headers
 )
 
-set(INSTALLATION_PATH ${CMAKE_CURRENT_SOURCE_DIR}/installation)
+set(INSTALLATION_PATH ${CMAKE_INSTALL_PREFIX}/bin/${CMAKE_PROJECT_NAME})
 
-install(TARGETS ${PROJECT_NAME}
-        RUNTIME DESTINATION ${INSTALLATION_PATH}/bin
-        LIBRARY DESTINATION ${INSTALLATION_PATH}/lib
-        ARCHIVE DESTINATION ${INSTALLATION_PATH}/lib/static)
+install(TARGETS ${CMAKE_PROJECT_NAME} DESTINATION ${INSTALLATION_PATH})
 
+install(FILES ${QML_SOURCES}
+        DESTINATION ${INSTALLATION_PATH}
+)
